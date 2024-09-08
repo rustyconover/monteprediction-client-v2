@@ -5,10 +5,10 @@ on:
     - cron: "5 5 * * 0"
   push:
     branches:
-      - main  # Change this to your main branch name
+      - master  # Change this to your main branch name
   pull_request:
     branches:
-      - main  # Change this to your main branch name
+      - master  # Change this to your main branch name
 
 jobs:
   build:
