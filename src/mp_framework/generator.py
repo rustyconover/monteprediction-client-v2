@@ -25,9 +25,10 @@ def generate_sample_with_weeks(
     lookback_num_weeks: int, use_zero_mean: bool, estimator
 ) -> pd.DataFrame:
     last_wednesday = get_last_wednesday()
-    lookback_num_weeks = 4
     start_date = last_wednesday - timedelta(weeks=lookback_num_weeks)
-    data = yf.download(SPDR_ETFS, start=start_date, end=last_wednesday, interval="1wk")
+    data = yf.download(
+        SPDR_ETFS, start=start_date, end=last_wednesday, interval="1wk", progress=False
+    )
     weekly_prices = data["Adj Close"]
     weekly_returns = weekly_prices.pct_change().dropna()
 
@@ -42,7 +43,6 @@ def generate_sample_with_weeks(
     )
     samples = qmc_engine.random(num_samples)
     df = pd.DataFrame(columns=SPDR_ETFS, data=samples)
-    print(df[:3])
 
     # Verify submission
     assert len(df.index) == num_samples, f"Expecting exactly {num_samples} samples"
