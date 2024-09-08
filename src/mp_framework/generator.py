@@ -176,13 +176,13 @@ robot_names = [
 assert os.environ["EMAIL"] is not None
 
 for zero_mean in [True, False]:
-    for name in sorted(methods.keys()):
+    for cov_method in sorted(methods.keys()):
         for weeks in [2, 3, 4, 8, 32, 52, 52 * 2, 52 * 3]:
             name = robot_names.pop()
-            label = f"weeks={weeks} estimator={name} zero_mean={zero_mean}"
+            label = f"weeks={weeks} estimator={cov_method} zero_mean={zero_mean}"
             print(f"Generating {label}")
-            df = generate_sample_with_weeks(weeks, zero_mean, methods[name])
-            print(f"Sending {name} - {label} to {os.environ['EMAIL']}")
+            df = generate_sample_with_weeks(weeks, zero_mean, methods[cov_method])
+            print(f"Sending {cov_method} - {label} to {os.environ['EMAIL']}")
             send_in_chunks(
                 df, num_chunks=num_chunks, email=os.environ["EMAIL"], name=name
             )
