@@ -1,5 +1,6 @@
 from . import generator
 
 
-def run() -> None:
+def run() -> int:
     generator.run()
+    return 0
