@@ -28,4 +28,4 @@ jobs:
       env: # Or as an environment variable
         EMAIL: ${{ secrets.EMAIL }}
       run: |
-        generate_predictions
+        rye run gen

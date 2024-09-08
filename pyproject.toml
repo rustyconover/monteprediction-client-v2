@@ -19,6 +19,9 @@ build-backend = "hatchling.build"
 [project.scripts]
 generate_predictions = 'mp_framework:run'
 
+[tool.rye.scripts]
+gen = {cmd = "generate_predictions", description = "Generate predicted returns"}
+
 [tool.rye]
 managed = true
 dev-dependencies = []
