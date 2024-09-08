@@ -1,0 +1,31 @@
+name: Python CI
+
+on:
+  schedule:
+    - cron: "5 5 * * 0"
+  push:
+    branches:
+      - main  # Change this to your main branch name
+  pull_request:
+    branches:
+      - main  # Change this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install the latest version of rye
+      uses: eifinger/setup-rye@v4
+
+    - name: Sync environment
+      run: |
+        rye sync
+
+    - name: Run Python script
+      env: # Or as an environment variable
+        EMAIL: ${{ secrets.EMAIL }}
+      run: |
+        generate_predictions
